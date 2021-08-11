@@ -13,14 +13,14 @@ namespace Consoletestwork
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
             "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI",
             "AJ", "AK", "AL", "AM", "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW",
-            "AX", "AY", "AZ"};
-        private int rowindex = 1;
+            "AX", "AY", "AZ"};//list of column identifiers
+        private int rowindex = 1;//regular indexs
         private int colindex = 0;
-        private int searchrindex = 1;
+        private int searchrindex = 1;//index for searching out cells
         private int searchcindex = 0;
-        private bool samefound;
-        private string authorcheck;
-        private int rowindexcheck = 1;
+        private bool samefound;//bool for if there is a match
+        private string authorcheck;//checks against the actual author of the message
+        private int rowindexcheck = 1;//indexing for checking rows
         
         Excel.Application shopapp = new Excel.Application();
         
@@ -29,7 +29,7 @@ namespace Consoletestwork
             Excel._Worksheet sheet = (Excel.Worksheet)shopapp.ActiveSheet;
             shopapp.Visible = true;
         }
-        public void Print()
+        public void Print()//checcks sfor an existing author first
         {
             searchcindex = 0;
             rowindexcheck = 1;
@@ -45,7 +45,7 @@ namespace Consoletestwork
                 }
                 searchcindex++;
             }
-            if (samefound == true)
+            if (samefound == true)//if existing author exists then it should add values under the author's name or under the preexisting values
             {
                 while (sheet.Cells[rowindexcheck, colindexary[searchcindex]] != null)
                 {
@@ -67,7 +67,7 @@ namespace Consoletestwork
                 }
 
             }
-            else
+            else //if not then it should create the author on the first row, then under the name, provide values
             {
                 while (sheet.Cells[1, colindexary[colindex]] != null)
                 {
