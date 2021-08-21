@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.IO;
 //TODO: REPLACE BREAKS WITH CONTINUE
@@ -21,9 +21,19 @@ namespace Consoletestwork
         private string[] prephaseauthor;//first split
         private string[] midphaseauthor;//second split
         public string[] stringset; //individual characters  of purchaseparse to be compared
+        public string[,] fullset = new string[500,500]; //formatting for ExcelPrint to output
+        public int fullsetrow = 0;
+        public int fullsetcol = 0;
         ArrayList resultingnumbers = new ArrayList(); //results of the gathered numbers
+        ArrayList dataset = new ArrayList();
+        private string[] datasetresult;
+        private bool match = false;
+        private int matching = 0;
+        private int ending = 0;
         
-       
+
+
+
         /*
          * The basic goal of this is to manuever through a
          * .txt file. Upon finding a line with "sold" in it
@@ -51,7 +61,7 @@ namespace Consoletestwork
          * 
          * [AUTHOR] [ITEM NUMBER]
          * 
-         */ 
+         */
 
         public void SiftStart(string directory)
         {
@@ -76,16 +86,27 @@ namespace Consoletestwork
                             author = midphaseauthor[0].Trim();//author of message is assigned
                             purchaseparse = parsingline[1];//assigned message half of the first split
                             stringset = purchaseparse.Split(" ");//message is broken up into words
+                            
                             Charsifter();
+                            
                             printableresults = (string[])resultingnumbers.ToArray(typeof(string));
                             resultingnumbers.Clear();
                             Console.WriteLine(author);
+                            dataset.Add(author);
                             foreach(string i in printableresults)
                             {
                                 Console.WriteLine(i);
-                            }
+                                dataset.Add(i);
+                            } 
+                            datasetresult = (string[])dataset.ToArray(typeof(string));
+                            
+                            Pseudogridmaker(datasetresult);
+                            
+                            dataset.Clear();
                         }
                     }
+                    ExcelPrint printload = new ExcelPrint(fullset);
+                    printload.Print();
                 }
                 catch (Exception e)//catches every exception from the try in order to prevent a memory leak
                 {
@@ -108,7 +129,7 @@ namespace Consoletestwork
          * If not it is skipped over, if it is, it is recorded in another 
          * array to be recombined. (TODO: not done yet)
          */
-        public void Charsifter()
+        private void Charsifter()
         {
             try
             {
@@ -151,6 +172,38 @@ namespace Consoletestwork
                 Console.WriteLine(e.Message);
                 return;
             }
+        }
+        private void Pseudogridmaker(string[] item){
+            for (int i = 0; i < fullsetcol + 1; i++)
+            {
+                if(item[0] == fullset[0, i])
+                {
+                    Console.WriteLine("match");
+                    ending = 0;
+                    match = true;
+                    matching = i;
+                    while (fullset[ending, matching] != null)
+                    {
+                        ending++;
+                    }
+                    for (int inner = 1; inner < item.Length; inner++)
+                    {
+                        fullset[ending, matching] = item[inner];
+                        ending++;
+                    }
+                    
+                    return;
+                }
+            }
+            
+            for (int i = 0; i < item.Length; i++)
+            {
+                fullset[i, fullsetcol] = item[i];
+            }
+            fullsetcol++;
+            
+
+
         }
     }
 }
