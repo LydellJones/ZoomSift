@@ -1,11 +1,15 @@
-﻿namespace Consoletestwork
+using System;
+
+namespace ZoomSift
 {
     public class Program
     {
         static public void Main(string[] args)
-        { 
-            ExcelParse workload = new ExcelParse();//path for file
-            workload.SiftStart("example.txt");//enter a sample file
+        {
+            Console.WriteLine("Input File Path...:");
+            string path = Console.ReadLine();
+            ExcelParse workload = new ExcelParse();
+            workload.SiftStart(path);
         }
     }
 }
