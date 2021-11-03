@@ -1,6 +1,6 @@
 # ZoomSift
 
-# WARNING THIS IS NOT A STABLE RELEASE
+# STABLE ENOUGH 😂
 
 The purpose of what i have made comes as follows:
 
