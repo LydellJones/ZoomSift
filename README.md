@@ -1,7 +1,7 @@
 # ZoomSift
 
 # !!!THIS VERSION IS CURRENTLY DEPRECIATED AS THE TRANSCRIPT FORMAT HAS NOW CHANGED!!!
-# Changes will be made soon to deal with the change
+# Changes will be made soon to deal with the updated format.
 
 The purpose of what i have made comes as follows:
 
