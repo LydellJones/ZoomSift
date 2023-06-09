@@ -1,6 +1,6 @@
 # ZoomSift
 
-# STABLE ENOUGH 😂
+# !!!THIS VERSION IS CURRENTLY DEPRECIATED AS THE TRANSCRIPT FORMAT HAS NOW CHANGED!!!
 
 The purpose of what i have made comes as follows:
 
